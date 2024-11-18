@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class OrderService {
     @Autowired
@@ -28,5 +31,13 @@ public class OrderService {
         // Calculate total price and save order
         order.setTotalPrice(product.getPrice() * order.getQuantity());
         return orderRepository.save(order);
+    }
+
+    public List<Orders> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public Optional<Orders> getOrdersId(Long id) {
+        return  orderRepository.findById(id);
     }
 }
